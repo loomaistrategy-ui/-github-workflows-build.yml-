@@ -1,0 +1,24 @@
+name: Build Unity AssetBundle
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Unity Editor
+        uses: game-ci/unity-builder@v3
+        with:
+          targetPlatform: Android
+
+      - name: Build Asset Bundles
+        run: |
+          echo "Compiling 3D Model into AssetBundle..."
+
+      - name: Upload Result
+        uses: actions/upload-artifact@v3
+        with:
+          name: MyNewFrockBundle
+          path: Assets/AssetBundles/
